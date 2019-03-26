@@ -1,0 +1,23 @@
+{
+  "name": "mean-example",
+  "version": "1.0.0",
+  "description": "MEAN App Example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/980359ffjh/MEAN-Example.git"
+  },
+  "author": "Rong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/980359ffjh/MEAN-Example/issues"
+  },
+  "homepage": "https://github.com/980359ffjh/MEAN-Example#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jade": "^1.11.0"
+  }
+}
