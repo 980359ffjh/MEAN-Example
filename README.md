@@ -22,3 +22,7 @@ npm install
 ```bash
 bower install
 ```
+
+若安裝時出現版本選擇問題
+
+![image](https://user-images.githubusercontent.com/48819258/54979959-7a51e700-4fdf-11e9-920f-335ffcf8a14e.PNG)
