@@ -1,2 +1,7 @@
 .idea
 node_modules
+angular
+angular-resource
+angular-route
+jquery
+toastr
