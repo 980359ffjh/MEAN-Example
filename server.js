@@ -13,8 +13,8 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // MongoDB 全域
-const url = 'mongodb://localhost:27017';
-const dbName = 'NodeJS';
+// const url = 'mongodb://localhost:27017';
+// const dbName = 'NodeJS';
 
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'jade');
@@ -30,22 +30,22 @@ app.use(stylus.middleware({
 app.use(express.static(path.join(__dirname, '/public')));
 
 // MongoDB 全域
-MongoClient.connect(url, (err, client) => {
-    try {
-        debug('Connected to MongoDB server');
+// MongoClient.connect(url, (err, client) => {
+//     try {
+//         debug('Connected to MongoDB server');
 
-        const db = client.db(dbName);
-        const col = db.collection('Messages');
+//         const db = client.db(dbName);
+//         const col = db.collection('Messages');
 
-        // col.findOne((err, result) => {
-        //     message = result.message;
-        // });
-    } catch (error) {
-        debug(error.stack);
-    }
+//         col.findOne((err, result) => {
+//             message = result.message;
+//         });
+//     } catch (error) {
+//         debug(error.stack);
+//     }
 
-    client.close();
-});
+//     client.close();
+// });
 
 app.get('/clientApp/:clientAppPath', (req, res) => {
     res.render('clientApp/' + req.params.clientAppPath);
@@ -53,37 +53,37 @@ app.get('/clientApp/:clientAppPath', (req, res) => {
 
 app.get('*', (req, res) => {
     // MongoDB 區域
-    // const url = 'mongodb://localhost:27017';
-    // const dbName = 'NodeJS';
+    const url = 'mongodb://localhost:27017';
+    const dbName = 'NodeJS';
 
-    // (async function mongo() {
-    //     let client = await MongoClient.connect(url);
+    (async function mongo() {
+        let client = await MongoClient.connect(url);
 
-    //     try {
-    //         const db = client.db(dbName);
-    //         const col = await db.collection('Messages');
-    //         const messages = await col.findOne();
+        try {
+            const db = client.db(dbName);
+            const col = await db.collection('Messages');
+            const messages = await col.findOne();
 
-    //         res.render(
-    //             './home/index',
-    //             {
-    //                 Message: messages.message
-    //             }
-    //         );
-    //     } catch (error) {
-    //         debug(error.stack);
-    //     }
+            res.render(
+                './home/index',
+                {
+                    Message: messages.message
+                }
+            );
+        } catch (error) {
+            debug(error.stack);
+        }
 
-    //     client.close();
-    // }());
+        client.close();
+    }());
 
     // MongoDB 全域
-    res.render('./home/index'
-        // './home/index',
-        // {
-        //     Message: message
-        // }
-    );
+    // res.render(
+    //     './home/index',
+    //     {
+    //         Message: message
+    //     }
+    // );
 });
 
 app.listen(port, () => {
