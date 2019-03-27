@@ -62,12 +62,12 @@ app.get('*', (req, res) => {
         try {
             const db = client.db(dbName);
             const col = await db.collection('Messages');
-            const obj = await col.findOne({}, { projection: { _id: 0, message: 1 } });
+            const result = await col.findOne({}, { projection: { _id: 0, message: 1 } });
 
             res.render(
                 './home/index',
                 {
-                    Message: obj.message
+                    Message: result.message
                 }
             );
         } catch (error) {
