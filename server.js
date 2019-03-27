@@ -23,6 +23,10 @@ app.use(stylus.middleware({
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.get('/clientApp/:clientAppPath', (req, res) => {
+    res.render('clientApp/' + req.params.clientAppPath);
+});
+
 app.get('*', (req, res) => {
     res.render('./home/index');
 });
