@@ -29,7 +29,7 @@ app.use(stylus.middleware({
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 
-// MongoDB 全域
+// MongoDB 全域 (只連線一次，查詢一次)
 // MongoClient.connect(url, (err, client) => {
 //     try {
 //         debug('Connected to MongoDB server');
@@ -52,14 +52,16 @@ app.get('/clientApp/:clientAppPath', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    // MongoDB 區域
+    // MongoDB 區域 (每次進入，就每次連線及查詢)
     const url = 'mongodb://localhost:27017';
     const dbName = 'NodeJS';
 
     (async function mongo() {
-        let client = await MongoClient.connect(url);
-
+        let client;
         try {
+            client = await MongoClient.connect(url, { useNewUrlParser: true });
+            debug('Connected to MongoDB server');
+            
             const db = client.db(dbName);
             const col = await db.collection('Messages');
             const result = await col.findOne({}, { projection: { _id: 0, message: 1 } });

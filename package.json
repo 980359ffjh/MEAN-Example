@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "SET DEBUG=app, app:* & nodemon server.js"
   },
+  "engines": {
+    "node": "10.13.x",
+    "npm": "6.4.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/980359ffjh/MEAN-Example.git"
