@@ -32,3 +32,51 @@ bower install
 ```bash
 npm start
 ```
+
+# 發佈到 Heroku
+
+將 .gitignore 中與 js source 相關的套件註解，表示要一起上傳
+
+使用 `heroku` 進行相關設定
+
+登入 Heroku
+
+```bash
+heroku login
+```
+
+創建 Heroku 的 repositry
+
+```bash
+heroku create
+```
+
+設定開發環境
+
+```bash
+heroku config:set NODE_ENV=production
+```
+
+用 `git` 查看 remote 分支
+
+```bash
+git remote -v
+```
+
+開始部屬
+
+```bash
+git push heroku master
+```
+
+啟動 web dyno
+
+```bash
+heroku ps:scale web=1
+```
+
+完成部屬，開啟網頁
+
+```bash
+heroku open
+```
