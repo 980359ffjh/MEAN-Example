@@ -8,7 +8,3 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', { templateUrl: '/clientApp/app', controller: 'appController' });
 });
-
-angular.module('app').controller('appController', function ($scope) {
-    $scope.hello = "Hello Angular";
-});
