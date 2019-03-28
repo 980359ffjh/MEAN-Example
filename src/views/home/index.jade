@@ -1,7 +1,19 @@
 extends ../shared/_layout
 
 block main-content
+    .navbar.navbar-inverse.navbar-fixed-top
+        .container
+            .navbar-header
+                a.navbar-brand(href='/') MEAN App
+                    h6 -Extreme Tech Training
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href='/') Home
     section.content
         div(ng-view)
     //- h2= Message
     h2 Data from MongoDB query : #{ Message }
+
+    footer.container.text-center
+        p &copy; 2019 MEAD App Corp International Ltd.
