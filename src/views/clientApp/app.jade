@@ -1,2 +1,10 @@
-h1 This is a ClientApp
-h2 {{ hello }}
+.container
+    .jumbotron
+        h1 MEAN App
+        p Welcome to MEAN App! The most comprehensive and complete collection of extreme tech training videos on the web.
+
+    .row
+        .col-md-6
+            div(ng-include="'/clientApp/featured-courses'")
+        .col-md-6
+            div(ng-include="'/clientApp/new-courses'")

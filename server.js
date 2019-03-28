@@ -72,15 +72,15 @@ app.get('*', (req, res) => {
             client = await MongoClient.connect(url, { useNewUrlParser: true });
             debug('Connected to MongoDB server');
 
-            const db = client.db(dbName);
-            const col = await db.collection('Messages');
-            const result = await col.findOne({}, { projection: { _id: 0, message: 1 } });
+            // const db = client.db(dbName);
+            // const col = await db.collection('Messages');
+            // const result = await col.findOne({}, { projection: { _id: 0, message: 1 } });
 
             res.render(
-                './home/index',
-                {
-                    Message: result.message
-                }
+                './home/index'
+                // {
+                //     Message: result.message
+                // }
             );
         } catch (error) {
             debug(error.stack);
