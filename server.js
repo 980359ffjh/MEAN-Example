@@ -8,12 +8,17 @@ const session = require('express-session');
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app');
 
-// const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3000;
 const app = express();
 
 // MongoDB 全域
-// const url = 'mongodb://localhost:27017';
+// let url;
+// if (env === 'development')
+//     url = 'mongodb://localhost:27017';
+// else
+//     // mLab 的 Connection String，User pwd 有特殊符號，要經過 Hex 轉換(https://ascii.cl/)
+//     url = 'mongodb+srv://MEAN:%24h1neW%40ve@mean-bizku.mongodb.net/test?retryWrites=true';
 // const dbName = 'NodeJS';
 
 app.set('views', path.join(__dirname, 'src/views'));
@@ -53,7 +58,12 @@ app.get('/clientApp/:clientAppPath', (req, res) => {
 
 app.get('*', (req, res) => {
     // MongoDB 區域 (每次進入，就每次連線及查詢)
-    const url = 'mongodb://localhost:27017';
+    let url;
+    if (env === 'development')
+        url = 'mongodb://localhost:27017';
+    else
+        // mLab 的 Connection String，User pwd 有特殊符號，要經過 Hex 轉換(https://ascii.cl/)
+        url = 'mongodb+srv://MEAN:%24h1neW%40ve@mean-bizku.mongodb.net/test?retryWrites=true';
     const dbName = 'NodeJS';
 
     (async function mongo() {
@@ -61,7 +71,7 @@ app.get('*', (req, res) => {
         try {
             client = await MongoClient.connect(url, { useNewUrlParser: true });
             debug('Connected to MongoDB server');
-            
+
             const db = client.db(dbName);
             const col = await db.collection('Messages');
             const result = await col.findOne({}, { projection: { _id: 0, message: 1 } });
