@@ -6,5 +6,5 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         requireBase: false
     });
     $routeProvider
-        .when('/', { templateUrl: '/clientApp/app', controller: 'appController' });
+        .when('/', { templateUrl: '/angular/app/app', controller: 'appController' });
 });

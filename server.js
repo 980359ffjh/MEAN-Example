@@ -52,25 +52,25 @@ app.use(express.static(path.join(__dirname, '/public')));
 //     client.close();
 // });
 
-app.get('/clientApp/:clientAppPath', (req, res) => {
-    res.render('clientApp/' + req.params.clientAppPath);
+app.get('/angular/*', (req, res) => {
+    res.render('../../public/app/components/' + req.params[0]);
 });
 
 app.get('*', (req, res) => {
     // MongoDB 區域 (每次進入，就每次連線及查詢)
-    let url;
-    if (env === 'development')
-        url = 'mongodb://localhost:27017';
-    else
-        // mLab 的 Connection String，User pwd 有特殊符號，要經過 Hex 轉換(https://ascii.cl/)
-        url = 'mongodb+srv://MEAN:%24h1neW%40ve@mean-bizku.mongodb.net/test?retryWrites=true';
-    const dbName = 'NodeJS';
+    // let url;
+    // if (env === 'development')
+    //     url = 'mongodb://localhost:27017';
+    // else
+    //     // mLab 的 Connection String，User pwd 有特殊符號，要經過 Hex 轉換(https://ascii.cl/)
+    //     url = 'mongodb+srv://MEAN:%24h1neW%40ve@mean-bizku.mongodb.net/test?retryWrites=true';
+    // const dbName = 'NodeJS';
 
-    (async function mongo() {
-        let client;
-        try {
-            client = await MongoClient.connect(url, { useNewUrlParser: true });
-            debug('Connected to MongoDB server');
+    // (async function mongo() {
+    //     let client;
+    //     try {
+    //         client = await MongoClient.connect(url, { useNewUrlParser: true });
+    //         debug('Connected to MongoDB server');
 
             // const db = client.db(dbName);
             // const col = await db.collection('Messages');
@@ -82,12 +82,12 @@ app.get('*', (req, res) => {
                 //     Message: result.message
                 // }
             );
-        } catch (error) {
-            debug(error.stack);
-        }
+    //     } catch (error) {
+    //         debug(error.stack);
+    //     }
 
-        client.close();
-    }());
+    //     client.close();
+    // }());
 
     // MongoDB 全域
     // res.render(
