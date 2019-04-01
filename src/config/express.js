@@ -5,9 +5,10 @@ const stylus = require('stylus');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const debug = require('debug')('app:express');
 
 module.exports = function expressConfig(app, config) {
-    console.log('path:', config.rootPath);
+    debug('config :', config);
     app.set('views', path.join(config.rootPath, 'src/views'));
     app.set('view engine', 'jade');
     app.use(morgan('tiny'));

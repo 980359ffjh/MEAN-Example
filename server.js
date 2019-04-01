@@ -1,6 +1,6 @@
 const express = require('express');
 const debug = require('debug')('app');
-const env = process.env.NODE_ENV || 'development';
+const env = process.argv[2] || 'development';
 const app = express();
 
 const config = require('./src/config/config')[env];
